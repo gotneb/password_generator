@@ -4,8 +4,8 @@
 */
 #include <iostream>
 #include <string>
-#include <ctime>
-#include <cstdlib>
+
+#include "password.h"
 
 using std::cin;
 using std::cout;
@@ -15,34 +15,17 @@ using std::string;
 
 int main() 
 {
-    // Create a seed based on time
-    std::srand(time(nullptr));
+    Password generator;
+    string answer = "s"; 
 
-    // Base for generate password
-    string characters = "abcdefghijklmnopqrstuvwxyz";
-    string digits = "0123456789";
-    //string others = "!@#$%_";
-
-    // input
-    decltype(characters.size()) length_password;
-    cout << "Please insert length password: ";
-    cin >> length_password;
-    while (length_password <= 0 || length_password >= 30) {
-        cout << "Please insert a valid length!\nLength: ";
-        cin >> length_password;
+    while (tolower(answer[0]) != 'n') {
+        system("clear");
+        auto my_password = generator.CreatePassword();
+        cout << "Password: " << my_password << endl;
+        cout << "----------------------\n" 
+        << "Deseja criar uma nova senha? [S/N]: ";
+        cin >> answer;
     }
-
-    string password;
-
-    for (decltype(digits.size()) i = 0; i != length_password; ++i) {
-        if (rand()%3 <= 1) {
-            password += rand()%2 == 0 ? characters.at(std::rand()%characters.size()) : toupper(characters.at(std::rand()%characters.size()));
-        } else {
-            password += digits.at(std::rand()%digits.size());
-        }
-    }   
-
-    cout << "Password: " + password << endl;
-
-    return 0;
+    
+    cout << ";-; BYE BYE! s2" << endl;
 }
